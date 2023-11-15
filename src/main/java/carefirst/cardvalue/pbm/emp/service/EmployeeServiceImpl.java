@@ -14,7 +14,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
-    public void deleteEmployee(int employeeId) {
+    public void deleteEmployee(Long employeeId) {
         employeeRepository.deleteById(employeeId);
     }
     public Employee createNewEmployee(Employee employee) {
@@ -23,7 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<Employee> getEmployees() {
         return employeeRepository.findAll();
     }
-    public Optional<Employee> findEmployee(int employeeId) {
+    public Optional<Employee> findEmployee(Long employeeId) {
         return employeeRepository.findById(employeeId);
     }
 }

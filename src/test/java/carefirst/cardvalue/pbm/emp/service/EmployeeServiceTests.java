@@ -26,7 +26,7 @@ public class EmployeeServiceTests {
     @BeforeEach
     public void setup(){
         employee = Employee.builder()
-                .id(1)
+                .id(1L)
                 .firstName("Rob")
                 .lastName("Frank")
                 .emailAddress("rob@msn.com")
@@ -43,7 +43,7 @@ public class EmployeeServiceTests {
     @Test
     public void givenEmployeesList_whenGetAllEmployees_thenReturnEmployeesList(){
         Employee employee1 = Employee.builder()
-                .id(2)
+                .id(2L)
                 .firstName("Tony")
                 .lastName("Stark")
                 .emailAddress("tony@gmail.com")

@@ -88,7 +88,7 @@ public class EmployeeControllerTest {
                 .lastName("C")
                 .emailAddress("sean@msn.com")
                 .build();
-        given(employeeService.findEmployee(Integer.valueOf(employeeId))).willReturn(Optional.of(employee));
+        given(employeeService.findEmployee(Long.getLong(employeeId))).willReturn(Optional.of(employee));
 
         // when
         ResultActions response = mockMvc.perform(get("/api/v1/employees/{id}", employeeId));
@@ -111,7 +111,7 @@ public class EmployeeControllerTest {
                 .lastName("Bob")
                 .emailAddress("bob@msn.com")
                 .build();
-        given(employeeService.findEmployee(Integer.valueOf(employeeId))).willReturn(Optional.empty());
+        given(employeeService.findEmployee(Long.getLong(employeeId))).willReturn(Optional.empty());
 
         // when
         ResultActions response = mockMvc.perform(get("/api/employees/{id}", employeeId));
@@ -127,7 +127,7 @@ public class EmployeeControllerTest {
     public void test_whenDeleteEmployee() throws Exception{
         // given
         String employeeId = "1";
-        willDoNothing().given(employeeService).deleteEmployee(Integer.valueOf(employeeId));
+        willDoNothing().given(employeeService).deleteEmployee(Long.getLong(employeeId));
 
         // when
         ResultActions response = mockMvc.perform(delete("/api/employees/{id}", employeeId));

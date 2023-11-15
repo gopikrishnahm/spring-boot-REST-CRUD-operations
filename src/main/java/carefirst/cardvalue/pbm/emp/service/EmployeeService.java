@@ -14,8 +14,8 @@ import java.util.Optional;
 
 @Service
 public interface  EmployeeService {
-    void deleteEmployee(int employeeId);
+    void deleteEmployee(Long employeeId);
     Employee createNewEmployee(Employee employee);
     List<Employee> getEmployees();
-    Optional<Employee> findEmployee(int employeeId);
+    Optional<Employee> findEmployee(Long employeeId);
 }

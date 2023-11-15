@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/employees")
 @CrossOrigin
 @Slf4j
 public class EmployeeController {
@@ -23,7 +23,7 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
 
-    @PostMapping("/employees")
+    @PostMapping("/")
     public ResponseEntity<?> createEmployee(@RequestBody Employee employee) {
         log.info("Creating new Employee.");
         try {
@@ -37,14 +37,14 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/employees")
+    @GetMapping("/")
     public ResponseEntity<?> getEmployees() {
             log.info("Getting all  employee list.");
             List<Employee> employees = new ArrayList<Employee>();
             try {
                 employeeService.getEmployees().forEach(employees::add);
                 if (employees.isEmpty()) {
-                    return new ResponseEntity<>(StatusCode.NO_EMPLOYEE_EMPID_FOUND_ERROR.getDescription(), HttpStatus.OK);
+                    return new ResponseEntity<>(StatusCode.NO_DATA_FOUND_ERROR.getDescription(), HttpStatus.OK);
                 }
                 return new ResponseEntity<>(employees, HttpStatus.OK);
             } catch (Exception e) {
@@ -54,11 +54,11 @@ public class EmployeeController {
             }
     }
 
-    @GetMapping("/employees/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity <?> findEmployee(@PathVariable("id") String id) {
         log.info("Finding employee with id {}  ", id);
         try {
-            Optional<Employee> employeeData = employeeService.findEmployee(Integer.valueOf(id));
+            Optional<Employee> employeeData = employeeService.findEmployee(Long.getLong(id));
             if (employeeData.isPresent()) {
                 return new ResponseEntity<>(employeeData, HttpStatus.OK);
             } else {
@@ -72,13 +72,13 @@ public class EmployeeController {
         }
     }
 
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity <?>  deleteEmployee(@PathVariable("id") String id) {
         try {
             log.info("Deleting employee with id {}  ", id);
-            Optional<Employee> employeeData = employeeService.findEmployee(Integer.valueOf(id));
+            Optional<Employee> employeeData = employeeService.findEmployee(Long.getLong(id));
           if (employeeData.isPresent()) {
-                employeeService.deleteEmployee(Integer.valueOf(id));
+                employeeService.deleteEmployee(Long.getLong(id));
               return new ResponseEntity<>(StatusCode.DELETE_EMPLOYEE_MSG, HttpStatus.OK);
            } else {
               return new ResponseEntity<>(StatusCode.NO_EMPLOYEE_EMPID_FOUND_ERROR.getDescription(), HttpStatus.OK);
@@ -90,10 +90,10 @@ public class EmployeeController {
         }
     }
 
-    @PutMapping("/employees/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateEmployee(@PathVariable("id") String id, @RequestBody Employee employee) {
         log.info("Updating employee with id {}  ", id);
-        Optional<Employee> employeeData = employeeService.findEmployee(Integer.valueOf(id));
+        Optional<Employee> employeeData = employeeService.findEmployee(Long.getLong(id));
         try {
             if (employeeData.isPresent()) {
                 Employee _emp = employeeData.get();
