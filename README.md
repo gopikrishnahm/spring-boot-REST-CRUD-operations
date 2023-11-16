@@ -3,7 +3,7 @@
 This project demonstrate the design and implement a Spring Boot REST API with CRUD operations on Employee Entity.
 This application user Spring Boot in-memory Database (H2) to save Employee Entity. H2 database can be accessed through the UR given below(Credentials provided).
 
-Application url - http://localhost:8080
+Application url -  http://localhost:8080/api/v1/employees/
 Swagger UI : http://localhost:8080/swagger-ui/index.html
 H2 DB link : http://localhost:8080/h2-ui     username : sa  pwd:123
 
@@ -17,7 +17,7 @@ Sample api calls
  
 Create:
  method: Post
- url: localhost:8080/api/v1/employees
+ url: localhost:8080/api/v1/employees/
  Request body:
  
  {
