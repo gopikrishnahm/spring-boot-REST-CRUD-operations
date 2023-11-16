@@ -55,7 +55,7 @@ public class EmployeeServiceTests {
 
     @Test
     public void givenEmployeeId_whenGetEmployeeById_thenReturnEmployeeObject(){
-        given(employeeRepository.findById(1)).willReturn(Optional.of(employee));
+        given(employeeRepository.findById(1L)).willReturn(Optional.of(employee));
         Employee savedEmployee = employeeService.findEmployee(employee.getId()).get();
         // then
         assertThat(savedEmployee).isNotNull();
