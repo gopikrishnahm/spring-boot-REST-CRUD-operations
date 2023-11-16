@@ -45,7 +45,7 @@ public class EmployeeControllerTest {
                 .willAnswer((invocation)-> invocation.getArgument(0));
 
         // when
-        ResultActions response = mockMvc.perform(post("/api/v1/employees")
+        ResultActions response = mockMvc.perform(post("/api/v1/employees/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(employee)));
         // then
@@ -69,7 +69,7 @@ public class EmployeeControllerTest {
         given(employeeService.getEmployees()).willReturn(listOfEmployees);
 
         // when
-        ResultActions response = mockMvc.perform(get("/api/v1/employees"));
+        ResultActions response = mockMvc.perform(get("/api/v1/employees/"));
 
         // then
         response.andExpect(status().isOk())
